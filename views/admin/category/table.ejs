@@ -1,0 +1,30 @@
+<table id="example2" class="table table-bordered table-hover">
+  <thead>
+    <tr>
+      <th>No.</th>
+      <th>Nama Kategori</th>
+      <th>Aksi</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% category.forEach((category, i) => { i++ %>
+    <tr>
+      <td><%= i %></td>
+      <td><%= category.name %></td>
+      <td>
+        <form action="/category/delete/<%= category._id %>?_method=DELETE" method="post">
+          <a href="/category/edit/<%= category._id %>" class="btn btn-warning btn-sm">
+            <i class="fas fa-pencil-alt"></i>
+            Ubah
+          </a>
+          <button class="btn btn-danger btn-sm">
+            <i class="fas fa-trash-alt"></i>
+            Hapus
+          </button>
+        </form>
+      </td>
+    </tr>
+    <% }) %>
+
+  </tbody>
+</table>

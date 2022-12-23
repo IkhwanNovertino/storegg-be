@@ -1,0 +1,70 @@
+<table id="example2" class="table table-borderless table-hover">
+  <thead>
+    <tr>
+      <th>No.</th>
+      <th>Gambar</th>
+      <th>Nama Game</th>
+      <th>Kategori</th>
+      <th>Nominal</th>
+      <th>Status</th>
+      <th>Aksi</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% voucher.forEach((e, i) => { i++ %>
+    <tr>
+      <td><%= i %></td>
+      <td>
+        <img 
+          src="https://tokogames.herokuapp.com/uploads/<%= e.thumbnail %>" 
+          alt="<%= e.name %> Photo"
+          width="48px"
+          height="58px">
+      </td>
+      <td><%= e.name %></td>
+      <td><%= e?.category?.name ?? '-' %></td>
+      <td>
+        <% e.nominals.forEach(nominal => { %>
+          <span class="badge badge-info">
+            <%= nominal.coinQuantity %> <%= nominal.coinName %>
+          </span>
+        <% }) %>
+      </td>
+      <td>
+        <% if (e.status === 'Y') { %>
+          <span class="badge badge-success">
+            Aktif
+          </span>
+          <% } else { %>
+            <span class="badge badge-danger">
+              Tidak Aktif
+            </span>
+        <% } %>
+      </td>
+      <td>
+        <form action="/voucher/status/<%= e._id %>?_method=PUT" method="post" class="d-inline-block">
+          <button class="btn btn-outline-primary btn-sm">
+            <i class="fas fa-folder"></i>
+            <% if (e.status === 'Y') { %>
+                Matikan
+              <% } else { %>
+                  Hidupkan
+            <% } %>
+          </button>
+        </form>
+        <form action="/voucher/delete/<%= e._id %>?_method=DELETE" method="post" class="d-inline-block">
+          <a href="/voucher/edit/<%= e._id %>" class="btn btn-warning btn-sm">
+            <i class="fas fa-pencil-alt"></i>
+            Ubah
+          </a>
+          <button class="btn btn-danger btn-sm">
+            <i class="fas fa-trash-alt"></i>
+            Hapus
+          </button>
+        </form>
+      </td>
+    </tr>
+    <% }) %>
+
+  </tbody>
+</table>
