@@ -94,7 +94,8 @@ module.exports = {
         value: value,
         player: req.player._id,
         historyuser: {
-          name: res_voucher._doc.user?._id,
+          id: res_voucher._doc.user?._id,
+          name: res_voucher._doc.user?.name,
           phoneNumber: res_voucher._doc.user?.phoneNumber
         },
         category: res_voucher._doc.category._id,
@@ -183,7 +184,7 @@ module.exports = {
 
       category.forEach(element => {
         count.forEach(data => {
-          if (data._id.toString() === element._id.toString) {
+          if (data._id.toString() === element._id.toString()) {
             data.name = element.name;
           }
         })
